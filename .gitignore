@@ -1,0 +1,6 @@
+libgurobi90.so
+libgurobi.so.9.0.1
+
+**/__pycache__
+**/output
+**/*.pyc
