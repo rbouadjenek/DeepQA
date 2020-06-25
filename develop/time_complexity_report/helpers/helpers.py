@@ -1,3 +1,21 @@
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#  Copyright (c) 2020. ROHAN MAN AMATYA, Deakin University                     +
+#                Email:  RMAMATYA@deakin.edu.au                                +
+#                                                                              +
+#  Licensed under the Apache License, Version 2.0 (the "License");             +
+#   you may not use this file except in compliance with the License.           +
+#    You may obtain a copy of the License at:                                  +
+#                                                                              +
+#                 http://www.apache.org/licenses/LICENSE-2.0                   +
+#                                                                              +
+#    Unless required by applicable law or agreed to in writing, software       +
+#    distributed under the License is distributed on an "AS IS" BASIS,         +
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  +
+#    See the License for the specific language governing permissions and       +
+#    limitations under the License.                                            +
+#                                                                              +
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 import os
 import random
 import shutil
@@ -23,35 +41,18 @@ def get_random_array(array_size):
 
 
 def mean_confidence_interval_95(data):
+    """
+    Return the mean and the confidence interval at 95.
+    """
     mean = np.mean(data)
     conf_interval = (np.std(data) / np.sqrt(len(data))) * 1.96
     return mean, conf_interval
 
 
-def get_random_probabilities_list_with_positive_tokens(num_of_arrays, array_size, num_of_positive_tokens):
-    """
-    Return num_of_arrays number of random probability list based on number of positive tokens. Returns list of probability lists
-    """
-    probabilities_list = []
-
-    for array in range(num_of_arrays):
-        contiguous_positive_element = [1] * num_of_positive_tokens
-        probabilities = [0] * array_size
-        # For start of positive token sequence
-        random_start_index = get_random_numbers_between(
-            array_size - num_of_positive_tokens)  # the endindex is total length minus number of positive tokens
-        # random positive token distribution array
-        probabilities[
-        random_start_index:random_start_index + len(contiguous_positive_element)] = contiguous_positive_element
-        probabilities_list.append(probabilities)
-    return probabilities_list
-
-
 def get_random_probabilities_with_positive_tokens(array_size, num_of_positive_tokens):
     """
-    Return random probability list based on number of positive tokens. Returns probability list
+    Return random probability list based on number of positive tokens. Returns probability list.
     """
-
     contiguous_positive_element = [1] * num_of_positive_tokens
     probabilities = [0] * array_size
     # For start of positive token sequence
