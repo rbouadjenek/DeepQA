@@ -32,6 +32,8 @@ def select_LP_optimal_subsequence(probabilities):
     # Define the model.
     ###################
     model = Model('EF1-Score')
+    # Model console output masking
+    model.setParam( 'OutputFlag', False )
     # element variable
     w = model.addVars(dict_probabilities.keys(), lb=0.0, ub=1.0, vtype='C', name='w')
     I = model.addVars(dict_probabilities.keys(), lb=0.0, ub=1.0, vtype='B', name='I')
