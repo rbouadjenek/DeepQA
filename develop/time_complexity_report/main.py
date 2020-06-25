@@ -50,10 +50,10 @@ def main(num_of_positive_tokens):
     initialize_proces()
     total_executions = get_total_number_of_executions()
 
-    for impurity in GV.IMPURITY_ARRAY:
+    for impurity in tqdm(GV.IMPURITY_ARRAY, desc='Total progress'):
         output_df = pd.DataFrame(columns=GV.OUTPUT_FILE_COLUMNS)
 
-        for array_size in tqdm(GV.ARRAY_SIZE_LIST, desc='Total execution'):
+        for array_size in tqdm(GV.ARRAY_SIZE_LIST, desc='Processing different array sizes'):
             # initial random probability based on number of positive tokens
             probabilities = helpers.get_random_probabilities_with_positive_tokens(array_size, num_of_positive_tokens)
             run_row_dict = {}
