@@ -17,7 +17,7 @@ def get_random_numbers_between(end_index):
 def get_random_array(array_size):
 	return [float('%.2f'%(random.random())) for _ in range(0, array_size)]
 
-def mean_confidence_interval(data):
+def mean_confidence_interval_95(data):
     mean = np.mean(data)
     conf_interval = (np.std(data)/np.sqrt(sum(data))) * 1.96
     return mean, conf_interval

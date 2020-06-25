@@ -8,6 +8,7 @@ import os
 import argparse
 from helpers import ef1_helpers
 
+
 def initialize_proces():
 	# helpers.remove_dir(GV.OUTPUT_DIR)
 	helpers.create_dir(GV.OUTPUT_DIR)
@@ -58,13 +59,9 @@ def main(num_of_positive_tokens):
 				helpers.print_progress_bar(completed_executions, total_executions, prefix = 'Progress:', suffix = 'Complete', length = 50)
 
 			# computing mean and confidence interval
-			milp_ef1_mean, milp_ef1_confidence_interval = helpers.mean_confidence_interval(milp_ef1_time_duration_list)
-			brute_force_ef1_mean, brute_force_ef1_confidence_interval = helpers.mean_confidence_interval(brute_force_ef1_time_duration_list)
+			milp_ef1_mean, milp_ef1_confidence_interval = helpers.mean_confidence_interval_95(milp_ef1_time_duration_list)
+			brute_force_ef1_mean, brute_force_ef1_confidence_interval = helpers.mean_confidence_interval_95(brute_force_ef1_time_duration_list)
 
-
-			# print(probabilities_list)
-			# output_df['PROBABILITIES'] = probabilities_list
-			# output_df['IMPURITY_PROBABILITIES'] = impurity_injection_probabilities_list
 			run_row_dict['DATA_SIZE'] = array_size
 			run_row_dict['TIME_MILP'] = milp_ef1_mean
 			run_row_dict['TIME_MILP_CI'] = milp_ef1_confidence_interval
@@ -82,10 +79,11 @@ def main(num_of_positive_tokens):
 																				)
 																				), sep='\t', index=False)
 
-if __name__ == '__main__':
-	parser = argparse.ArgumentParser(description='Expected f1-score for optimal substring using MILP and brute force')
-	parser.add_argument("--p", help="Number of positive tokens", type=int, required=True) 
-	args = parser.parse_args()
 
-	num_of_positive_tokens = args.p
-	main(num_of_positive_tokens)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Expected f1-score for optimal substring using MILP and brute force')
+    parser.add_argument("--p", help="Number of positive tokens", type=int, required=True)
+    args = parser.parse_args()
+
+    num_of_positive_tokens = args.p
+    main(num_of_positive_tokens)
