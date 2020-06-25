@@ -2,7 +2,7 @@ import random
 # import numpy as np
 from gurobipy import *
 import pandas as pd
-from time_complexity_report import helpers
+from time_complexity_report.helpers import ef1_helpers
 
 REPORT_FILE_NAME = 'assert_equality.tsv'
 OUTPUT_COLUMNS = ['Array_Size','Brute_Force_Optimal','MILP_Optimal','Brute_Force_ef1','Milp_ef1','Match','incorrect_array']
@@ -18,9 +18,9 @@ OUTPUT_DF = pd.DataFrame(columns=OUTPUT_COLUMNS)
 
 
 def assert_milp_brute_force_optimal_substring(probabilities):
-	brute_force_index_tuple, brute_force_max_ef1_score = helpers.get_brute_force_optimal_substring(probabilities)
+	brute_force_index_tuple, brute_force_max_ef1_score = ef1_helpers.get_brute_force_optimal_substring(probabilities)
 	brute_force_index_tuple = (brute_force_index_tuple[0], brute_force_index_tuple[1]-1)
-	s, e, milp_max_ef1_score = helpers.select_LP_optimal_subsequence(probabilities)
+	s, e, milp_max_ef1_score = ef1_helpers.select_LP_optimal_subsequence(probabilities)
 	milp_index_tuple = (s, e)
 	return brute_force_index_tuple, brute_force_max_ef1_score, milp_index_tuple, milp_max_ef1_score
 

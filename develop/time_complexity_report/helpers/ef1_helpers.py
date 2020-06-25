@@ -1,22 +1,5 @@
-import os
-import random
-import shutil
 from gurobipy import *
-
-def create_dir(dir_path):
-	if not os.path.exists(dir_path):
-		os.mkdir(dir_path)
-
-def remove_dir(dir_path):
-	if os.path.exists(dir_path):
-		shutil.rmtree(dir_path)
-
-def get_random_numbers_between(end_index):
-	return random.randint(0, end_index)
-
-def get_random_array(array_size):
-	return [float('%.2f'%(random.random())) for _ in range(0, array_size)]
-
+    
 
 def select_LP_optimal_subsequence(probabilities):
     """
