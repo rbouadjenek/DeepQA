@@ -53,7 +53,7 @@ def main(num_of_positive_tokens):
     for impurity in tqdm(GV.IMPURITY_ARRAY, desc='Total progress'):
         output_df = pd.DataFrame(columns=GV.OUTPUT_FILE_COLUMNS)
 
-        for array_size in tqdm(GV.ARRAY_SIZE_LIST, desc='Processing different array sizes'):
+        for array_size in tqdm(GV.ARRAY_SIZE_LIST, desc='Arrays processing with impurity = ' + str(impurity)):
             # initial random probability based on number of positive tokens
             probabilities = helpers.get_random_probabilities_with_positive_tokens(array_size, num_of_positive_tokens)
             run_row_dict = {}
@@ -61,7 +61,7 @@ def main(num_of_positive_tokens):
             milp_ef1_time_duration_list = []
             brute_force_ef1_time_duration_list = []
 
-            for run in tqdm(range(GV.NUM_OF_RUNS), desc='Averaging'):
+            for run in range(GV.NUM_OF_RUNS):
                 # probability with impurity
                 impurity_injection_probabilities = helpers.get_impure_probabilities(probabilities, impurity)
                 # computing time for milp ef1 score
