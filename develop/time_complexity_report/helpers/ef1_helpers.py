@@ -1,6 +1,26 @@
-from gurobipy import *
-import numpy as np
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#  Copyright (c) 2020. Reda Bouadjenek & ROHAN MAN AMATYA, Deakin University   +
+#     Email: reda.bouadjenek@dekain.edu.au and RMAMATYA@deakin.edu.au          +
+#                                                                              +
+#  Licensed under the Apache License, Version 2.0 (the "License");             +
+#   you may not use this file except in compliance with the License.           +
+#    You may obtain a copy of the License at:                                  +
+#                                                                              +
+#                 http://www.apache.org/licenses/LICENSE-2.0                   +
+#                                                                              +
+#    Unless required by applicable law or agreed to in writing, software       +
+#    distributed under the License is distributed on an "AS IS" BASIS,         +
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  +
+#    See the License for the specific language governing permissions and       +
+#    limitations under the License.                                            +
+#                                                                              +
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+import os
+import random
+import shutil
+import numpy as np
+from gurobipy import *
 
 def create_dir(dir_path):
     if not os.path.exists(dir_path):
@@ -35,7 +55,7 @@ def select_LP_optimal_subsequence(probabilities):
     ###################
     model = Model('EF1-Score')
     # Model console output masking
-    model.setParam( 'OutputFlag', False )
+    model.setParam('OutputFlag', False)
 
     # element variable
     w = model.addVars(dict_probabilities.keys(), lb=0.0, ub=1.0, vtype='C', name='w')
@@ -99,11 +119,13 @@ def get_substring_ef1_score(probabilities, substring_seq):
     expected_precision = sum_of_substring_probabilities / num_of_indicator_rv
     expected_recall = sum_of_substring_probabilities / sum_of_all_probabilities
     # calculating expected ef1 score
-    try:
-        ef1_score_for_substring = (2 * expected_precision * expected_recall) / (expected_precision + expected_recall)
-    except:
+    if expected_precision + expected_recall != 0:
+        ef1_score_for_substring = (2 * expected_precision * expected_recall) / (
+                expected_precision + expected_recall)
+    else:
         # handling of division by 0
         ef1_score_for_substring = 0
+
     return ef1_score_for_substring
 
 

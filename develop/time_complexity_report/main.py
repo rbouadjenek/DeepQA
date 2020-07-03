@@ -1,25 +1,39 @@
-from helpers import helpers
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#  Copyright (c) 2020. ROHAN MAN AMATYA, Deakin University                     +
+#                Email:  RMAMATYA@deakin.edu.au                                +
+#                                                                              +
+#  Licensed under the Apache License, Version 2.0 (the "License");             +
+#   you may not use this file except in compliance with the License.           +
+#    You may obtain a copy of the License at:                                  +
+#                                                                              +
+#                 http://www.apache.org/licenses/LICENSE-2.0                   +
+#                                                                              +
+#    Unless required by applicable law or agreed to in writing, software       +
+#    distributed under the License is distributed on an "AS IS" BASIS,         +
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  +
+#    See the License for the specific language governing permissions and       +
+#    limitations under the License.                                            +
+#                                                                              +
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+from helpers import helpers, ef1_helpers
 import GlovalVariables as GV
-import numpy as np
-import scipy.stats
 import time
 import pandas as pd
 import os
 import argparse
-from helpers import ef1_helpers
+from tqdm import tqdm
 
 
 def initialize_proces():
-	# helpers.remove_dir(GV.OUTPUT_DIR)
-	helpers.create_dir(GV.OUTPUT_DIR)
-
+    # helpers.remove_dir(GV.OUTPUT_DIR)
+    helpers.create_dir(GV.OUTPUT_DIR)
 
 
 def get_brute_force_ef1_execution_time(probabilities):
-	start = time.time()
-	brute_force_index_tuple, brute_force_max_ef1_score = ef1_helpers.get_brute_force_optimal_substring(probabilities)
-	return time.time()-start
-
+    start = time.time()
+    brute_force_index_tuple, brute_force_max_ef1_score = ef1_helpers.get_brute_force_optimal_substring(probabilities)
+    return time.time() - start
 
 def get_bps_ef1_execution_time_and_bounding_indices(probabilities):
 	start = time.time()
@@ -33,26 +47,26 @@ def get_milp_ef1_executiong_time_and_bounding_indices(probabilities):
 	return time.time()-start, s, e
 
 
+
 def get_total_number_of_executions():
-	return len(GV.ARRAY_SIZE_LIST)*len(GV.IMPURITY_ARRAY)* (GV.NUM_OF_RUNS)
+    return len(GV.ARRAY_SIZE_LIST) * len(GV.IMPURITY_ARRAY) * (GV.NUM_OF_RUNS)
 
 
 def main(num_of_positive_tokens):
 	initialize_proces()
 	total_executions = get_total_number_of_executions()
-	completed_executions = 0
 
 
 	mil_bps_df = pd.DataFrame(columns=GV.MILP_BPS_FILE_COLUMNS)
 
-	for impurity in GV.IMPURITY_ARRAY:
+	for impurity in tqdm(GV.IMPURITY_ARRAY, desc='Total progress'):
 		output_df = pd.DataFrame(columns=GV.OUTPUT_FILE_COLUMNS)
 	
-		for array_size in GV.ARRAY_SIZE_LIST:
+		for array_size in tqdm(GV.ARRAY_SIZE_LIST, desc='Arrays processing with impurity = {}'.format(impurity)):
 			# initial random probability based on number of positive tokens
 			probabilities = helpers.get_random_probabilities_with_positive_tokens(array_size, num_of_positive_tokens)
 			run_row_dict = {}
-			print('Array Size: {}, Impurity: {}'.format(array_size, impurity))
+			# print('Array Size: {}, Impurity: {}'.format(array_size, impurity))
 			milp_ef1_time_duration_list = []
 			brute_force_ef1_time_duration_list = []
 			bps_ef1_time_duration_list = []
@@ -63,24 +77,18 @@ def main(num_of_positive_tokens):
 			milp_bps_row['IMPURITY'] = impurity
 			for run in range(GV.NUM_OF_RUNS):
 				# probability with impurity
-				impurity_injection_probabilities = helpers.get_impure_probabilities(array_size, probabilities, impurity)
+				impurity_injection_probabilities = helpers.get_impure_probabilities(probabilities, impurity)
 				# computing time for milp ef1 score
 				mil_exec_time, milp_s, milp_e = get_milp_ef1_executiong_time_and_bounding_indices(impurity_injection_probabilities)
 				milp_ef1_time_duration_list.append(mil_exec_time)
 				# computing time for brute force ef1 score
 				brute_force_ef1_time_duration_list.append(get_brute_force_ef1_execution_time(impurity_injection_probabilities))
-				completed_executions += 1
-				helpers.print_progress_bar(completed_executions, total_executions, prefix = 'Progress:', suffix = 'Complete', length = 50)
-
-		
+				# computing time for bps ef1 score		
 				bps_exec_time, bps_start, bps_end = get_bps_ef1_execution_time_and_bounding_indices(impurity_injection_probabilities)
 				bps_ef1_time_duration_list.append(bps_exec_time)
 
-				# milp_bps_row['probabilities'] = impurity_injection_probabilities
 				milp_bps_row['MILP_EF1_SCORE'] = ef1_helpers.get_substring_ef1_score(impurity_injection_probabilities,(milp_s, milp_e+1))
 				milp_bps_row['BPS_EF1_SCORE'] = ef1_helpers.get_substring_ef1_score(impurity_injection_probabilities,(bps_start, bps_end+1))
-				# milp_bps_row['MILP_EF1_SCORE1'] = (milp_s, milp_e)
-				# milp_bps_row['BPS_EF1_SCORE1'] = (bps_start, bps_end)
 				mil_bps_df = mil_bps_df.append(milp_bps_row, ignore_index=True)
 
 			# computing mean and confidence interval

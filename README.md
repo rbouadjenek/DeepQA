@@ -11,3 +11,4 @@ Research Project for Deep Query Answering Systems
 - https://arxiv.org/pdf/2001.09694v2.pdf
 - https://arxiv.org/pdf/1908.05147.pdf
 - https://arxiv.org/pdf/1608.07905.pdf
+- https://arxiv.org/pdf/1907.10529.pdf
