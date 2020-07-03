@@ -1,5 +1,5 @@
 from gurobipy import *
-
+import numpy as np
 
 
 def create_dir(dir_path):
@@ -77,9 +77,16 @@ def select_LP_optimal_subsequence(probabilities):
     return int(round(s.X)), int(round(e.X)), optimal_value
 
 
-def get_brute_force_substring_ef1_score(probabilities, substring_seq):
+def get_substring_ef1_score(probabilities, substring_seq):
     """
-    Get expected F1-score for a substring
+    Get expected F1-score for a probability distribution
+
+    params:
+    probabilities (list): List of probabilities
+    substring_seq (tuple): start and end index
+    Returns:
+    float: Expected f1 score for a string
+
     """
     # sum of all probabilities
     sum_of_all_probabilities = sum(probabilities)
@@ -101,8 +108,18 @@ def get_brute_force_substring_ef1_score(probabilities, substring_seq):
 
 
 def get_brute_force_optimal_substring(probabilities):
+    """
+    Generated optimal substring based on EF1 score
+
+    params:
+    probabilities (list): List of probabilities
+
+    Returns:
+    ((start_index, end_index), optimal ef1 score): The end_index is inclusive and should be substracted by 1 to get actual 0-based index.
+
+   """
     # for brute Force
-    # print('Computing Brute Force')
+    # #print('Computing Brute Force')
     optimal_ef1_score_dict = {}
     # list of all subset indices
     all_substring_index_list = [(i, i + j) for i in range(0, len(probabilities)) for j in
@@ -110,10 +127,73 @@ def get_brute_force_optimal_substring(probabilities):
     # getting ef1-score for each substring
     for substring_index_list in all_substring_index_list:
         optimal_ef1_score_dict[
-            (substring_index_list[0], substring_index_list[1])] = get_brute_force_substring_ef1_score(probabilities,
+            (substring_index_list[0], substring_index_list[1])] = get_substring_ef1_score(probabilities,
                                                                                                       substring_index_list)
-    # print(optimal_ef1_score_dict)
+    # #print(optimal_ef1_score_dict)
     optimal_ef1_score_dict_sorted = sorted(optimal_ef1_score_dict.items(), key=lambda x: x[1], reverse=True)
     # returns tuple of start and end indices
     # return optimal subset indices
     return optimal_ef1_score_dict_sorted[0][0], optimal_ef1_score_dict_sorted[0][1]
+
+
+def get_mid_index(min, max):
+    """
+    Get the middle index from a list
+
+    params:
+    min (int): start index
+    max (int): end index
+
+    Returns:
+    int: The middle index
+
+    """
+    return int((min+max)/2)
+
+def binary_partition_search(probabilities):
+    """
+    Get the middle index from a list
+
+    params:
+    probabilities (list): A list of probabilities associated to each token 
+
+    Returns:
+    int: End index of the optimal ef1-score sub list. This index is exclusive and 1 needs to be added.
+    """
+    _min, _max = 0, len(probabilities)
+    _mid = get_mid_index(1, _max)
+    while _min!=_max and _mid!=_max and _min!=_mid:
+        #print((_min, _mid, _max))
+        min_mid_slice_ef1_score = get_substring_ef1_score(probabilities, (_min, _mid))
+        #print(min_mid_slice_ef1_score)
+        # #print(_min, _max)
+        min_max_slice_ef1_score = get_substring_ef1_score(probabilities, (_min, _max))
+        #print(min_max_slice_ef1_score)
+        if (min_mid_slice_ef1_score >= min_max_slice_ef1_score):
+            _max = _mid
+            _mid = get_mid_index(_min, _max)
+        else:
+            _min = _mid
+            _mid = get_mid_index(_min, _max)
+        #print((_min, _mid, _max))
+        #print('-------------')
+    return _mid
+
+
+def bps_bound_contraction_algo(probabilities):
+    """
+    Get the middle index from a list
+
+    params:
+    probabilities (list): A list of probabilities associated to each token 
+
+    Returns:
+    int: Start index s and end index e of the subsequence with the highest EF1 score
+    """
+    np_probabilities = np.array(probabilities)
+    end_index = binary_partition_search(np_probabilities)
+    optimal_probabilities_subset = np_probabilities[0:end_index+1]
+    optimal_probabilities_subset_reverse = optimal_probabilities_subset[::-1]
+    #print('reverse')
+    start_index = len(optimal_probabilities_subset_reverse) - (binary_partition_search(optimal_probabilities_subset_reverse)+1)     # since this is also end index
+    return start_index, end_index
