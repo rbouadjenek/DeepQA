@@ -22,6 +22,7 @@ import shutil
 import numpy as np
 from gurobipy import *
 
+
 def create_dir(dir_path):
     if not os.path.exists(dir_path):
         os.mkdir(dir_path)
@@ -150,27 +151,13 @@ def get_brute_force_optimal_substring(probabilities):
     for substring_index_list in all_substring_index_list:
         optimal_ef1_score_dict[
             (substring_index_list[0], substring_index_list[1])] = get_substring_ef1_score(probabilities,
-                                                                                                      substring_index_list)
+                                                                                          substring_index_list)
     # #print(optimal_ef1_score_dict)
     optimal_ef1_score_dict_sorted = sorted(optimal_ef1_score_dict.items(), key=lambda x: x[1], reverse=True)
     # returns tuple of start and end indices
     # return optimal subset indices
     return optimal_ef1_score_dict_sorted[0][0], optimal_ef1_score_dict_sorted[0][1]
 
-
-def get_mid_index(min, max):
-    """
-    Get the middle index from a list
-
-    params:
-    min (int): start index
-    max (int): end index
-
-    Returns:
-    int: The middle index
-
-    """
-    return int((min+max)/2)
 
 def binary_partition_search(probabilities):
     """
@@ -183,22 +170,22 @@ def binary_partition_search(probabilities):
     int: End index of the optimal ef1-score sub list. This index is exclusive and 1 needs to be added.
     """
     _min, _max = 0, len(probabilities)
-    _mid = get_mid_index(1, _max)
-    while _min!=_max and _mid!=_max and _min!=_mid:
-        #print((_min, _mid, _max))
+    _mid = int((_min + _max) / 2)
+    while _min != _max and _mid != _max and _min != _mid:
+        # print((_min, _mid, _max))
         min_mid_slice_ef1_score = get_substring_ef1_score(probabilities, (_min, _mid))
-        #print(min_mid_slice_ef1_score)
+        # print(min_mid_slice_ef1_score)
         # #print(_min, _max)
         min_max_slice_ef1_score = get_substring_ef1_score(probabilities, (_min, _max))
-        #print(min_max_slice_ef1_score)
+        # print(min_max_slice_ef1_score)
         if (min_mid_slice_ef1_score >= min_max_slice_ef1_score):
             _max = _mid
-            _mid = get_mid_index(_min, _max)
+            _mid = int((_min + _max) / 2)
         else:
             _min = _mid
-            _mid = get_mid_index(_min, _max)
-        #print((_min, _mid, _max))
-        #print('-------------')
+            _mid = int((_min + _max) / 2)
+        # print((_min, _mid, _max))
+        # print('-------------')
     return _mid
 
 
@@ -214,8 +201,9 @@ def bps_bound_contraction_algo(probabilities):
     """
     np_probabilities = np.array(probabilities)
     end_index = binary_partition_search(np_probabilities)
-    optimal_probabilities_subset = np_probabilities[0:end_index+1]
+    optimal_probabilities_subset = np_probabilities[0:end_index + 1]
     optimal_probabilities_subset_reverse = optimal_probabilities_subset[::-1]
-    #print('reverse')
-    start_index = len(optimal_probabilities_subset_reverse) - (binary_partition_search(optimal_probabilities_subset_reverse)+1)     # since this is also end index
+    # print('reverse')
+    start_index = len(optimal_probabilities_subset_reverse) - (
+                binary_partition_search(optimal_probabilities_subset_reverse) + 1)  # since this is also end index
     return start_index, end_index
