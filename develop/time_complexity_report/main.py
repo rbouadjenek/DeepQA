@@ -72,10 +72,15 @@ def main(num_of_positive_tokens):
             # milp vs bps
             milp_bps_row = {}
             milp_bps_row['DATA_SIZE'] = array_size
+            milp_bps_row['PROBABILITIES'] = probabilities
 
             for run in range(GV.NUM_OF_RUNS):
                 # probability with impurity
                 impurity_injection_probabilities = helpers.get_impure_probabilities(probabilities, impurity)
+
+                # assign probabilities to output
+                milp_bps_row['CORRUPTED_PROBABILITIES'] = impurity_injection_probabilities 
+
                 # computing time for milp ef1 score
                 mil_exec_time, milp_s, milp_e = get_milp_ef1_executiong_time_and_bounding_indices(
                                                                                                 impurity_injection_probabilities
