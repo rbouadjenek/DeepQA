@@ -3,7 +3,7 @@ Research Project for Deep Query Answering Systems
 
 ## Interesting papers
 
-- https://arxiv.org/pdf/1909.02209.pdf
+- https://arxiv.org/pdf/1909.02209.pdf (paper that describes the best the technique!)
 - https://arxiv.org/pdf/1810.06638.pdf
 - https://arxiv.org/pdf/1808.05759.pdf
 - https://arxiv.org/pdf/1712.03556.pdf
