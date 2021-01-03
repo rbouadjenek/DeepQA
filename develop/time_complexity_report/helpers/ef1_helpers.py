@@ -207,3 +207,39 @@ def bps_bound_contraction_algo(probabilities):
     start_index = len(optimal_probabilities_subset_reverse) - (
                 binary_partition_search(optimal_probabilities_subset_reverse) + 1)  # since this is also end index
     return start_index, end_index
+
+
+def get_substring_performance_score(probabilities, substring_seq):
+    """
+    Compute performance for a given substring -- precision, recall, F1-Score, and Exact Match.
+
+    params:
+    probabilities (list): List of probabilities
+    substring_seq (tuple): start and end index (both inclusive)
+
+    Returns:
+    float: performance metrics: precision, recall, F1-Score, and Exact Match.
+    """
+    # sum of all probabilities
+    sum_of_all_probabilities = sum(probabilities)
+    # probability substring
+    substring_probabilities = probabilities[substring_seq[0]:substring_seq[1]]
+    # sum of probabilities of substring
+    sum_of_substring_probabilities = sum(substring_probabilities)
+    # sum of indicator random variables
+    num_of_indicator_rv = len(substring_probabilities)
+    precision = sum_of_substring_probabilities / num_of_indicator_rv
+    recall = sum_of_substring_probabilities / sum_of_all_probabilities
+    # calculating expected ef1 score
+    if precision + recall != 0:
+        f1_score = (2 * precision * recall) / (
+                precision + recall)
+    else:
+        # handling of division by 0
+        f1_score = 0
+
+    em = 0
+    if sum_of_all_probabilities == sum_of_substring_probabilities:
+        em = 1
+
+    return precision, recall, f1_score, em
