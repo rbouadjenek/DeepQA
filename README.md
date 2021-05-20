@@ -1,6 +1,10 @@
 # DeepQA
 Research Project for Deep Query Answering Systems
 
+[click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0.ipynb). 
+
+
+
 ## Interesting papers
 
 - https://arxiv.org/pdf/1909.02209.pdf (paper that describes the best the technique!)
