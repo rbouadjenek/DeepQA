@@ -209,6 +209,7 @@ class SquadExample:
             token_type_ids = token_type_ids[0:max_len]
             input_ids = input_ids[0:max_len]
             output_mask = output_mask[0:max_len]
+            labels = labels[0:max_len]
             if end_token_idx >= max_len:
                 self.skip = True
 
