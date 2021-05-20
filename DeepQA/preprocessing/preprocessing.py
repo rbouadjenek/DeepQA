@@ -85,7 +85,7 @@ def get_NewsQA():
 
 # raw_train_data, raw_val_data, raw_test_data = get_SQuAD1()
 # raw_train_data, raw_val_data, raw_test_data = get_SQuAD2()
-raw_train_data, raw_val_data, raw_test_data = get_NewsQA()
+# raw_train_data, raw_val_data, raw_test_data = get_NewsQA()
 
 
 def get_stats(raw_data):
