@@ -1,7 +1,7 @@
 # DeepQA
 Research Project for Deep Query Answering Systems
 
-- MLIP: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_MILP.ipynb). 
+- MILP: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_MILP.ipynb). 
 - Baseline 1: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_Baseline1.ipynb). 
 
 
