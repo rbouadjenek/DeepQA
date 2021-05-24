@@ -190,6 +190,7 @@ class SquadExample:
             # print('reda')
             start_token_idx = ans_token_idx[0]
             end_token_idx = ans_token_idx[-1]
+            labels[0] = 1
 
         # Create inputs
         input_ids = tokenized_question.ids + tokenized_context.ids[1:]
