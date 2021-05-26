@@ -326,7 +326,13 @@ def create_inputs_targets(squad_examples):
     # y1 = dataset_dict["start_token_idx"]
     y2 = np.asarray(dataset_dict["labels"])
     y3 = np.asarray(dataset_dict["ans_token_idx"])
-    return x, y1, y2, y3, skipped
+
+    y4 = []
+    for j in range(len(y1[0])):
+        y4.append(np.array([[y1[0][j]], [y1[1][j]]]))
+    y4 = np.array(y4)
+
+    return x, y1, y2, y3, y4, skipped
 
 
 # max_len = 300
