@@ -293,7 +293,7 @@ def create_squad_examples(raw_data, max_len, tokenizer, debug=False):
     return squad_examples, skipped_questions
 
 
-def create_inputs_targets(squad_examples):
+def create_inputs_targets(squad_examples, max_ans_len=10):
     dataset_dict = {
         "input_ids": [],
         "token_type_ids": [],
@@ -328,9 +328,23 @@ def create_inputs_targets(squad_examples):
     y3 = np.asarray(dataset_dict["ans_token_idx"])
 
     y4 = []
-    for j in range(len(y1[0])):
-        y4.append(np.array([[y1[0][j]], [y1[1][j]]]))
+    y5 = []
+    for i in range(len(y1[0])):
+        y4.append(np.array([[y1[0][i]], [y1[1][i]]]))
+        tmp_list = list(range(y1[0][i],y1[1][i]))
+
+
+
+        for v in   tmp_list:
+            y5.append(np.array([[y1[0][i]], [y1[1][i]]]))
+
+
+
     y4 = np.array(y4)
+    y5 = np.array(y4)
+
+
+
 
     return x, y1, y2, y3, y4, skipped
 
