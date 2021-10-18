@@ -1,7 +1,21 @@
-# DeepQA
-Research Project for Deep Query Answering Systems:
+# Optimizing F1-Score for Text Spans Extraction in Question Answering Systems
 
-<b>Optimizing F1-Score for Text Spans Extraction in Question Answering Systems</b>
+<b>Abstract</b>
+
+Current question answering systems are based on complex deep neural network architectures where often, the output
+consists of two classification layers that are used to predict simultaneously the start and end positions of the answer in the input
+passage. However, we argue in this paper that this approach suffers from several drawbacks. First, it does not optimize the metrics that
+are used to evaluate the model’s performance, e.g., F1-Score or exact-match. Second, this approach does not allow encoding all
+possible answers during training, and during prediction, it only focuses on one possible answer and does not allow the extraction of
+other candidate answers. Lastly, this approach does not prevent the case where the token with the highest probability for being the
+answer start token comes after the token with the highest probability for being the answer end token. This paper addresses these
+deficiencies by proposing a novel approach for text spans extraction, which consists of a single classification output layer followed by
+an independent optimization module. This 2-step approach aims first to optimize exact-match and then extracts a text span by
+maximizing an expected F1-Score (EF1) objective. Specifically, we contribute with a Mixed Integer Linear Programming (MILP)
+formulation to optimize EF1 subject to parameterized constraints for text spans extraction. The proposed approach allows the
+extraction of multiple possible answers to a question from a passage and to identify if a span of text is a valid answer and so the
+answerability of the question given the passage. We demonstrate the effectiveness of our approach with extensive experimental
+evaluations and a comparison against existing baselines on the SQuAD1.1, SQuAD2.0, and NewsQA datasets.
 
 
 
@@ -50,3 +64,8 @@ The MILP algorithm described in the paper can be executed in the Notebook in:
 - https://arxiv.org/pdf/1908.05147.pdf
 - https://arxiv.org/pdf/1608.07905.pdf
 - https://arxiv.org/pdf/1907.10529.pdf
+
+
+# Contacts 
+For more information about this project, please contact:
+* Mohamed Reda Bouadjenek: rbouadjenek@gmail.com
