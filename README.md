@@ -21,8 +21,13 @@ evaluations and a comparison against existing baselines on the SQuAD1.1, SQuAD2.
 
 # Installation
 
+You need to install dependencies in `requirements.txt` usind the following command:
 
-The MILP algorithm described in the paper requires [Gurobi](https://www.gurobi.com/) to be installed in your Python environement. Please follow [these instructions](https://www.gurobi.com/documentation/9.1/quickstart_mac/software_installation_guid.html).
+```
+pip install -r requirements.txt
+```
+
+In addition, the MILP algorithm described in the paper requires [Gurobi](https://www.gurobi.com/) to be installed in your Python environement. Please follow [these instructions](https://www.gurobi.com/documentation/9.1/quickstart_mac/software_installation_guid.html).
 Once Gurobi is installed, you need to add it to your own Python environment. Doing so requires you to install the gurobipy module. The steps for doing this depend on your platform. On Linux, you will need to open a terminal window, change your current directory to the Gurobi `<installdir>` (the directory that contains the file setup.py), and issue the following command:
   
   
