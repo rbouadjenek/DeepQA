@@ -25,6 +25,7 @@ from transformers import BertTokenizer
 from tensorflow import keras
 from tqdm import tqdm
 
+
 def get_SQuAD1():
     train_data_url = "https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v1.1.json"
     train_path = keras.utils.get_file("train-v1.1.json", train_data_url)
@@ -327,27 +328,22 @@ def create_inputs_targets(squad_examples, max_ans_len=10):
     y2 = np.asarray(dataset_dict["labels"])
     y3 = np.asarray(dataset_dict["ans_token_idx"])
 
-    y4 = []
-    y5 = []
-    for i in range(len(y1[0])):
-        y4.append(np.array([[y1[0][i]], [y1[1][i]]]))
-        tmp_list = list(range(y1[0][i],y1[1][i]))
+    # y4 = []
+    # y5 = []
+    # for i in range(len(y1[0])):
+    #     y4.append(np.array([[y1[0][i]], [y1[1][i]]]))
+    #     tmp_list = list(range(y1[0][i],y1[1][i]))
+    #
+    #
+    #
+    #     for v in   tmp_list:
+    #         y5.append(np.array([[y1[0][i]], [y1[1][i]]]))
+    #
+    #
+    #
+    # y4 = np.array(y4)
 
-
-
-        for v in   tmp_list:
-            y5.append(np.array([[y1[0][i]], [y1[1][i]]]))
-
-
-
-    y4 = np.array(y4)
-    y5 = np.array(y4)
-
-
-
-
-    return x, y1, y2, y3, y4, skipped
-
+    return x, y1, y2, y3, skipped
 
 # max_len = 300
 #
