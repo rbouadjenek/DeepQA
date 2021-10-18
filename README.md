@@ -46,10 +46,10 @@ The MILP algorithm described in the paper can be executed in the Notebook in:
   You can train the models described in the paper by clicking on the following links:
   
 
-- MILP algorithm: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_MILP.ipynb). 
-- Baseline 1: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_Baseline1.ipynb). 
-- Baseline 3 ANSWER POINTER Sequence Model: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_ANSWER_POINTER_SM.ipynb). 
-- Baseline 4 ANSWER POINTER Boundary Model: [Click here to open the Notebook in Google Colab ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_ANSWER_POINTER_BM.ipynb). 
+- MILP algorithm: [Click here to open the Notebook ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_MILP.ipynb). 
+- Baseline 1: [Click here to open the Notebook ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_Baseline1.ipynb). 
+- Baseline 3 ANSWER POINTER Sequence Model: [Click here to open the Notebook ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_ANSWER_POINTER_SM.ipynb). 
+- Baseline 4 ANSWER POINTER Boundary Model: [Click here to open the Notebook ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_ANSWER_POINTER_BM.ipynb). 
 
 
 
