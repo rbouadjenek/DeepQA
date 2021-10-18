@@ -60,7 +60,7 @@ The MILP algorithm described in the paper can be executed in the Notebook in:
 
 ## Interesting papers to read
 
-- https://arxiv.org/pdf/1909.02209.pdf (paper that describes the best the technique!)
+- https://arxiv.org/pdf/1909.02209.pdf
 - https://arxiv.org/pdf/1810.06638.pdf
 - https://arxiv.org/pdf/1808.05759.pdf
 - https://arxiv.org/pdf/1712.03556.pdf
