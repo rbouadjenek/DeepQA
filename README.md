@@ -5,14 +5,25 @@ Research Project for Deep Query Answering Systems
 
 # Installation
 
+
 The MILP algorithm described in the paper requires [Gurobi](https://www.gurobi.com/) to be installed in your Python environement. Please follow [these instructions](https://www.gurobi.com/documentation/9.1/quickstart_mac/software_installation_guid.html).
-Once Gurobi is installed, you need to add it to your own Python environment. Doing so requires you to install the gurobipy module. The steps for doing this depend on your
-platform. On Linux, you will need to open a terminal window, change your current directory to
-the Gurobi <installdir> (the directory that contains the file setup.py), and issue the following
-command:
+Once Gurobi is installed, you need to add it to your own Python environment. Doing so requires you to install the gurobipy module. The steps for doing this depend on your platform. On Linux, you will need to open a terminal window, change your current directory to the Gurobi `<installdir>` (the directory that contains the file setup.py), and issue the following command:
+  
+  
 ```
 python setup.py install
 ```
+  
+# THE MILP Algorithm
+  
+The MILP algorithm described in the paper can be executed in the Notebook in:
+
+```
+├── DeepQA  
+   ├── MILP-Algorithm.ipynb
+```
+
+ Please install `Gurobi` as described above first.
   
 # Training the models
   
@@ -26,7 +37,7 @@ python setup.py install
 
 
 
-## Interesting papers
+## Interesting papers to read
 
 - https://arxiv.org/pdf/1909.02209.pdf (paper that describes the best the technique!)
 - https://arxiv.org/pdf/1810.06638.pdf
