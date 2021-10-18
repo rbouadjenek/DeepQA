@@ -1,5 +1,7 @@
 # DeepQA
-Research Project for Deep Query Answering Systems
+Research Project for Deep Query Answering Systems:
+
+<b>Optimizing F1-Score for Text Spans Extraction in Question Answering Systems</b>
 
 
 
