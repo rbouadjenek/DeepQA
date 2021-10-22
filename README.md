@@ -48,7 +48,7 @@ The MILP algorithm described in the paper can be executed in the Notebook in:
   
 # Training the models
   
-  You can train the models described in the paper by clicking on the following links (<b>make sure TPU is activated</b>):
+  You can train the models described in the paper by clicking on the following links (<b>make sure TPU is activated and that you have a Pro account</b>):
   
 
 - MILP algorithm: [Click here to open the Notebook ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rbouadjenek/DeepQA/blob/master/DeepQA/QA_V2.0_MILP.ipynb). 
